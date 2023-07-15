@@ -1,0 +1,37 @@
+.slider {
+  position: relative;
+  height: calc(100dvh - 5rem);
+  width: 100vw;
+  overflow: hidden;
+}
+.img-container {
+  width: 300vw;
+  height: 100%;
+  display: flex;
+  transition: all 600ms cubic-bezier(0.5, 0, 0.5, 1);
+}
+
+.slider img {
+  width: 100vw;
+  height: 100%;
+  object-fit: cover;
+}
+.icons-container {
+  margin: auto;
+  display: flex;
+  width: fit-content;
+  gap: 2rem;
+  position: absolute;
+  bottom: 10vh;
+  left: 0;
+  right: 0;
+}
+.slider-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  width: 45px;
+  border: 1px solid #555;
+  cursor: pointer;
+}
