@@ -13,12 +13,12 @@ export const cartSlice = createSlice({
       if (item) {
         item.quantity += action.payload.quantity;
       } else {
-        state.push(action.payload);
+        state.products.push(action.payload);
       }
     },
     removeItem: (state, action) => {
       state.products = state.products.filter(
-        (item) => item.id !== action.payload
+        (item) => item.id !== action.payload.id
       );
     },
     resetCart: (state, action) => {
