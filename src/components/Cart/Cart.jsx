@@ -1,9 +1,13 @@
 import React from "react";
+
 import "./Cart.css";
+
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
+
 import { useSelector } from "react-redux";
 import { removeItem, resetCart } from "../../redux/cartReducer";
 import { useDispatch } from "react-redux";
+
 import { makeRequest } from "../../makeRequest";
 import { loadStripe } from "@stripe/stripe-js";
 
@@ -37,7 +41,11 @@ const Cart = () => {
   };
   return (
     <div className="cart">
-      <h1>Products in your cart</h1>
+      {products.length == 0 ? (
+        <h1>Cart is empty</h1>
+      ) : (
+        <h1>Products in your cart</h1>
+      )}
       {products?.map((item) => (
         <div className="cart-item" key={item.id}>
           <img src={import.meta.env.VITE_IMG_URL + item.img} alt="" />
@@ -49,7 +57,7 @@ const Cart = () => {
             </div>
           </div>
           <DeleteOutlinedIcon
-            className="delete"
+            className="cart-delete"
             onClick={() => dispatch(removeItem(item.id))}
           />
         </div>
