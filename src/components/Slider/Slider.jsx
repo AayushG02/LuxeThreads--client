@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Slider.css";
 
 import ChevronRightSharpIcon from "@mui/icons-material/ChevronRightSharp";
@@ -7,11 +7,20 @@ import ChevronLeftSharpIcon from "@mui/icons-material/ChevronLeftSharp";
 const Slider = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
+  useEffect(() => {
+    const changeSlide = () => {
+      setCurrentSlide((current) => (current === 2 ? 0 : current + 1));
+    };
+    const interval = setInterval(changeSlide, 6000);
+
+    return () => clearInterval(interval); // cleanup function
+  }, []);
+
   const prevSlide = () => {
-    setCurrentSlide(currentSlide === 0 ? 2: (prev) => prev - 1)
+    setCurrentSlide((current) => (current === 0 ? 2 : current - 1));
   };
   const nextSlide = () => {
-    setCurrentSlide(currentSlide === 2 ? 0 : (prev) => prev + 1);
+    setCurrentSlide((current) => (current === 2 ? 0 : current + 1));
   };
 
   const data = [
@@ -21,7 +30,10 @@ const Slider = () => {
   ];
   return (
     <div className="slider">
-      <div className="img-container" style={{transform: `translateX(-${currentSlide * 100}vw`}} >
+      <div
+        className="img-container"
+        style={{ transform: `translateX(-${currentSlide * 100}vw` }}
+      >
         <img src={data[0]} />
         <img src={data[1]} />
         <img src={data[2]} />

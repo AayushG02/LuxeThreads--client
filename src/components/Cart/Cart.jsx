@@ -20,7 +20,7 @@ const Cart = () => {
   };
 
   const stripePromise = loadStripe(
-    "pk_test_eOTMlr8usx1ctymXqrik0ls700lQCsX2UB"
+    "pk_test_51NUrsQSEzfM6UcbCXN1wutEA4PzZufZyTHBSsL35Iw6N9SCA62q6QpiBdFEMzf2XsHFQKG5StV2QxmaPUYof4mWO00jxSlnSS6"
   );
   const handlePayment = async () => {
     try {
@@ -31,8 +31,8 @@ const Cart = () => {
       await stripe.redirectToCheckout({
         sessionId: res.data.stripeSession.id,
       });
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.log(error);
     }
   };
   return (
@@ -40,7 +40,7 @@ const Cart = () => {
       <h1>Products in your cart</h1>
       {products?.map((item) => (
         <div className="cart-item" key={item.id}>
-          <img src={process.env.REACT_APP_UPLOAD_URL + item.img} alt="" />
+          <img src={import.meta.env.VITE_IMG_URL + item.img} alt="" />
           <div className="details">
             <h1>{item.title}</h1>
             <p>{item.desc?.substring(0, 100)}</p>
@@ -56,7 +56,7 @@ const Cart = () => {
       ))}
       <div className="cart-total">
         <span>SUBTOTAL</span>
-        <span>${totalPrice()}</span>
+        <span>₹{totalPrice()}</span>
       </div>
       <button onClick={handlePayment}>PROCEED TO CHECKOUT</button>
       <span className="cart-reset" onClick={() => dispatch(resetCart())}>

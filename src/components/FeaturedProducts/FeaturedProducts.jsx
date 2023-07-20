@@ -6,7 +6,7 @@ const FeaturedProducts = ({ type }) => {
   const { data, loading, error } = useFetch(
     `/products?populate=*&filters[type][$eq]=${type}`
   );
-  console.log(data)
+  console.log("Featured Products: ", data)
   return (
     <div className="featured">
       <h1 className="featured-header">{type} Products</h1>

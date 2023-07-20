@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
-import List from "../../components/List/List"
+import List from "../../components/List/List";
 import "./Products.css";
 import useFetch from "../../hooks/useFetch";
 
@@ -12,8 +12,13 @@ const Products = () => {
   const [selectedSubCat, setSelectedSugbCat] = useState([]);
 
   const { data, loading, error } = useFetch(
-    `/sub-catogories?[filters][categories][id][$eq]=${id}`
+    `/sub-categories/`
   );
+
+  const { catData, catLoading, catError } = useFetch(
+    `/categories/${id}?populate=*`
+  );
+  console.log( "Catdata: ", catData)
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -87,11 +92,25 @@ const Products = () => {
         </div>
       </div>
       <div className="products-right">
-        {/* <img className="cat-img" src={ import.meta.env.VITE_IMG_URL + data.attributes.img.attributes.url} alt="" /> */}
-        <List catId={id} maxPrice={maxPrice} sort={sort} subCat = {selectedSubCat}/>
+        {catError ? "Something went wrong" : catLoading ? "Loading..." : <img
+          className="cat-img"
+          src={
+            import.meta.env.VITE_IMG_URL +
+            catData?.attributes?.img?.data?.attributes?.url
+          }
+          alt=""
+        />}
+        <List
+          catId={id}
+          maxPrice={maxPrice}
+          sort={sort}
+          subCat={selectedSubCat}
+        />
       </div>
     </div>
   );
 };
 
 export default Products;
+
+

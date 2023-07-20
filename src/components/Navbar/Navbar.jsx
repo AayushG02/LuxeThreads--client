@@ -7,30 +7,30 @@ import PersonOutlineSharpIcon from "@mui/icons-material/PersonOutlineSharp";
 import FavoriteBorderSharpIcon from "@mui/icons-material/FavoriteBorderSharp";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 
-// import Cart from "../Cart/Cart"
+import Cart from "../Cart/Cart"
 import "./Navbar.css";
 
 
 const Navbar = () => {
-  // const [isOpened, setIsOpened] = useState(false)
-  const products = useSelector(state.cart.products);
+  const [isOpened, setIsOpened] = useState(false)
+  const products = useSelector((state)=>state.cart.products);
   return (
     <nav className="navbar">
       <div className="wrapper">
         <div className="navbar-left">
           <div className="item">
-            <Link className="link" to="/products/2">
-              Men
+            <Link className="link" to="/">
+              Home
             </Link>
           </div>
           <div className="item">
             <Link className="link" to="/products/1">
-              Women
+              Men
             </Link>
           </div>
           <div className="item">
-            <Link className="link" to="/products/3">
-              Children
+            <Link className="link" to="/products/2">
+              Women
             </Link>
           </div>
         </div>
@@ -51,7 +51,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-      {/* {isOpened && <Cart />} */}
+      {isOpened && <Cart />}
     </nav>
   );
 };
