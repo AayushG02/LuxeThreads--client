@@ -11,7 +11,7 @@ const Navbar = () => {
   const [isSearchOpened, setIsSearchOpened] = useState(false);
   const products = useSelector((state) => state.cart.products);
   const toggleSidebar = () => {
-    setIsSidebarOpened(isSidebarOpened);
+    setIsSidebarOpened(!isSidebarOpened);
   };
   const toggleSearch = () => {
     setIsSearchOpened(!isSearchOpened);
