@@ -1,0 +1,46 @@
+.products-container {
+  margin: 2rem auto;
+  width: 80vw;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4rem;
+}
+.products-left {
+  flex: 1;
+}
+.filter-wrapper {
+  position: sticky;
+  top: 6rem;
+}
+.filter-item {
+  margin-bottom: 2rem;
+}
+.filter-item h2 {
+  font-family: "Playfair Display";
+  font-size: 1.6rem;
+}
+.input-item {
+  display: grid;
+  grid-template-columns: 1rem auto;
+  gap: 0.7rem;
+  margin: 1rem 0;
+  accent-color: #333;
+}
+.input-item input {
+  height: 1rem;
+  aspect-ratio: 1;
+  margin: auto;
+}
+.clear-filters {
+  margin-top: 2rem;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.products-right {
+  flex: 2;
+}
+@media screen and (max-width: 425px) {
+  .products-container {
+    width: 90vw;
+  }
+}
