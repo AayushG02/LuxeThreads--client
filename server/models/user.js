@@ -3,21 +3,24 @@ const Schema = mongoose.Schema;
 const bcrypt = require("bcrypt");
 // const validator = require("validator");
 
-const userSchema = new Schema({
-  name: {
-    type: String,
-    required: true,
+const userSchema = new Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    passwordHash: {
+      type: String,
+      required: true,
+    },
   },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  passwordHash: {
-    type: String,
-    required: true,
-  },
-});
+  { timestamps: true }
+);
 
 userSchema.statics.signup = async function (name, email, password) {
   const exists = await this.findOne({ email });
