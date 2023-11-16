@@ -27,13 +27,16 @@ const productSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    categories: {
-      type: [String],
-      enum: ["male", "female", "tshirt", "jogger"],
+    gender: {
+      type: String,
+      required: true,
+    },
+    category: {
+      type: String,
       required: true,
     },
   },
-  { timespatms: true }
+  { timestamps: true }
 );
 
 const Product = mongoose.model("Product", productSchema);
