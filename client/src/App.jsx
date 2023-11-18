@@ -6,6 +6,8 @@ import Products from "./pages/Products/Products";
 import Cart from "./pages/Cart/Cart";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
+import Success from "./pages/Success/Success";
+import Failed from "./pages/Failed/Failed";
 
 const Layout = () => {
   return (
@@ -37,6 +39,14 @@ const router = createBrowserRouter([
       {
         path: "/cart",
         element: <Cart />,
+      },
+      {
+        path: "/success",
+        element: <Success />,
+      },
+      {
+        path: "/failed",
+        element: <Failed />,
       },
     ],
   },

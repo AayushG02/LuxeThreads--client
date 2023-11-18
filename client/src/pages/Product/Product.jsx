@@ -6,15 +6,16 @@ import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutl
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/cartReducer";
 const Product = () => {
-  const id = parseInt(useParams().id);
+  const id = useParams().id;
   const dispatch = useDispatch();
   console.log(id);
   const { data, isLoading, isError } = useFetch(
-    import.meta.env.VITE_API_URL + `/products/${id}?populate=*`
+    import.meta.env.VITE_API_URL + `/products/${id}`
   );
+  console.log(data);
   const [quantity, setQuantity] = useState(1);
-  const [selectedImg, setSelectedImg] = useState("img");
-  const handleIncrement = () => {
+  const [selectedImg, setSelectedImg] = useState(0);
+  const handleIncrement = () => { 
     setQuantity((curr) => curr + 1);
   };
   const handleDecrement = () => {
@@ -25,40 +26,20 @@ const Product = () => {
     <div className="product-container">
       <div className="product-left">
         <div className="preview-img">
-          <img
-            src={
-              import.meta.env.VITE_IMG_URL +
-              data?.attributes?.img?.data?.attributes?.url
-            }
-            onClick={() => setSelectedImg("img")}
-          />
-          <img
-            src={
-              import.meta.env.VITE_IMG_URL +
-              data?.attributes?.img2?.data?.attributes?.url
-            }
-            onClick={() => setSelectedImg("img2")}
-          />
+          <img src={data?.images[0]} onClick={() => setSelectedImg(0)} />
+          <img src={data?.images[1]} onClick={() => setSelectedImg(1)} />
         </div>
         <div className="selected-img">
-          <img
-            src={
-              import.meta.env.VITE_IMG_URL +
-              data?.attributes?.[selectedImg]?.data?.attributes?.url
-            }
-            alt=""
-          />
+          <img src={data?.images[selectedImg]} alt="" />
         </div>
       </div>
       <div className="product-right">
-        <div className="product-title">{data?.attributes?.title}</div>
+        <div className="product-title">{data?.title}</div>
         <div className="product-price">
-          <span className="product-old-price">
-            ₹{data?.attributes?.price + 300}
-          </span>
-          ₹{data?.attributes?.price}
+          <span className="product-old-price">₹{data?.price + 300}</span>₹
+          {data?.price}
         </div>
-        <div className="product-desc">{data?.attributes?.desc}</div>
+        <div className="product-desc">{data?.description}</div>
         <div className="temp">
           <div className="product-quantity">
             <span>Quantity</span>
@@ -71,11 +52,11 @@ const Product = () => {
             onClick={() =>
               dispatch(
                 addToCart({
-                  id: data.id,
-                  title: data.attributes.title,
-                  desc: data.attributes.desc,
-                  price: data.attributes.price,
-                  img: data.attributes.img.data.attributes.url,
+                  id: data._id,
+                  title: data.title,
+                  description: data.description,
+                  price: data.price,
+                  img: data.images[0],
                   quantity,
                 })
               )

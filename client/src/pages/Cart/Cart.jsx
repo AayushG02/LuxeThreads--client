@@ -1,21 +1,20 @@
-import React from "react";
-
 import "./Cart.css";
-
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { removeItem, resetCart } from "../../redux/cartReducer";
-import { useDispatch } from "react-redux";
-
 import { makeRequest } from "../../../makeRequest";
+
 import { loadStripe } from "@stripe/stripe-js";
+
 
 const Cart = () => {
   const products = useSelector((state) => state.cart.products);
   const dispatch = useDispatch();
-
+  const stripePromise = loadStripe(
+    "pk_test_51NUrsQSEzfM6UcbCXN1wutEA4PzZufZyTHBSsL35Iw6N9SCA62q6QpiBdFEMzf2XsHFQKG5StV2QxmaPUYof4mWO00jxSlnSS6"
+  );
   const totalPrice = () => {
     let total = 0;
     products.forEach((item) => {
@@ -24,37 +23,53 @@ const Cart = () => {
     return total.toFixed(2);
   };
 
-  const stripePromise = loadStripe(
-    "pk_test_51NUrsQSEzfM6UcbCXN1wutEA4PzZufZyTHBSsL35Iw6N9SCA62q6QpiBdFEMzf2XsHFQKG5StV2QxmaPUYof4mWO00jxSlnSS6"
-  );
+  const getProductID = () => {
+    console.log(products);
+    var productID = [];
+    products.forEach((item) => {
+      productID.push(item.id);
+    });
+    console.log(productID);
+    return productID;
+  };
+
   const handlePayment = async () => {
     try {
-      const stripe = await stripePromise;
-      const res = await makeRequest.post("/orders", {
-        products,
+      const orderRes = await makeRequest.post("/order/create", {
+        products: getProductID(),
+        totalPrice: totalPrice(),
       });
+
+      const stripeRes = await makeRequest.post("/payment", {
+        products,
+        shippingAddressCollection: "required",
+      });
+
+      const stripe = await stripePromise;
+
       await stripe.redirectToCheckout({
-        sessionId: res.data.stripeSession.id,
+        sessionId: stripeRes.data.id,
       });
     } catch (error) {
-      console.log(error);
+      console.log("Payment process failed:", error);
     }
   };
+
   return (
     <div className="cart">
-      {products.length == 0 ? (
+      {products.length === 0 ? (
         <h1>Cart is empty</h1>
       ) : (
         <h1>Products in your cart</h1>
       )}
       <div className="cart-products">
         {products?.map((item) => (
-          <Link className="link" to={`/product/${item.id}`}>
+          <Link key={item.id} className="link" to={`/product/${item.id}`}>
             <div className="cart-item" key={item.id}>
-              <img src={import.meta.env.VITE_IMG_URL + item.img} alt="" />
+              <img src={item.img} alt="" />
               <div className="cart-details">
                 <h1>{item.title}</h1>
-                <p>{item.desc?.substring(0, 50)} ...</p>
+                <p>{item.description?.substring(0, 50)} ...</p>
                 <div className="cart-price">
                   {item.quantity} x ₹{item.price}
                 </div>
@@ -72,8 +87,13 @@ const Cart = () => {
         <span>₹{totalPrice()}</span>
       </div>
       <div className="cart-btns">
-        <button  className="proceed cart-btn " onClick={handlePayment}>PROCEED TO CHECKOUT</button>
-        <button className="cart-reset cart-btn " onClick={() => dispatch(resetCart())}>
+        <button className="proceed cart-btn " onClick={handlePayment}>
+          PROCEED TO CHECKOUT
+        </button>
+        <button
+          className="cart-reset cart-btn "
+          onClick={() => dispatch(resetCart())}
+        >
           Reset Cart
         </button>
       </div>

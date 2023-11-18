@@ -29,6 +29,16 @@ const getProductsByQuery = async (req, res) => {
   }
 };
 
+const getProductById = async(req, res) => {
+  const id = req.params.id;
+  try {
+    const product = await Product.findById(id);
+    res.status(200).json(product);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+}
+
 // const getProductByCategory = async (req, res) => {
 //   const category = req.params.category;
 //   try {
@@ -85,5 +95,6 @@ const createProduct = async (req, res) => {
 module.exports = {
   getAllProducts,
   getProductsByQuery,
+  getProductById,
   createProduct,
-};
+}

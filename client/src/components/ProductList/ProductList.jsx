@@ -1,37 +1,18 @@
 import React, { useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import Card from "../Card/Card";
-import "./ProductList.css"
+import "./ProductList.css";
 const ProductList = ({ type, isProducts, filters }) => {
   const [selectedCategory, setSelectedCategory] = useState("");
-  if (isProducts === true) {
-    const { sort, priceRange } = filters;
 
-    var url =
-      type === 3
-        ? import.meta.env.VITE_API_URL +
-          `/products?populate=*&filters[price][$lte]=${priceRange}&sort=price:${sort}&filters[isNew][$eq]=true${
-            selectedCategory !== ""
-              ? `&filters[sub_categories][id][$eq]=${selectedCategory}`
-              : ""
-          }`
-        : import.meta.env.VITE_API_URL +
-          `/products?populate=*&filters[price][$lte]=${priceRange}&sort=price:${sort}&filters[categories][id][$eq]=${type}${
-            selectedCategory !== ""
-              ? `&filters[sub_categories][id][$eq]=${selectedCategory}`
-              : ""
-          }`;
-  } else {
-    url =
-      import.meta.env.VITE_API_URL +
-      `/products?populate=*&filters[categories][id][$eq]=${type}${
-        selectedCategory !== ""
-          ? `&filters[sub_categories][id][$eq]=${selectedCategory}`
-          : ""
-      }`;
-  }
-  console.log(type, url);
+  var url =
+    import.meta.env.VITE_API_URL +
+    `/products?gender=${
+      type === 1 ? "male" : "female"
+    }&category=${selectedCategory}`;
+
   const { data, isLoading, isError } = useFetch(url);
+  console.log(data);
   return (
     <>
       <div className="featured-product-categories">
@@ -43,24 +24,24 @@ const ProductList = ({ type, isProducts, filters }) => {
             setSelectedCategory("");
           }}
         >
-          All
+          All 
         </div>
         <div
           className={`featured-item ${
-            selectedCategory === 1 ? "selected-item" : ""
+            selectedCategory === "tshirt" ? "selected-item" : ""
           }`}
           onClick={() => {
-            setSelectedCategory(1);
+            setSelectedCategory("tshirt");
           }}
         >
           T-Shirt
         </div>
         <div
           className={`featured-item ${
-            selectedCategory === 2 ? "selected-item" : ""
+            selectedCategory === "joggers" ? "selected-item" : ""
           }`}
           onClick={() => {
-            setSelectedCategory(2);
+            setSelectedCategory("joggers");
           }}
         >
           Joggers
@@ -72,7 +53,7 @@ const ProductList = ({ type, isProducts, filters }) => {
           : isLoading
           ? "Loading..."
           : data?.map((item) => {
-              return <Card key={item.id} item={item} />;
+              return <Card key={item._id} item={item} />;
             })}
       </div>
     </>

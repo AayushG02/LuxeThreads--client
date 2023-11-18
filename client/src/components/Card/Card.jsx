@@ -3,27 +3,26 @@ import { Link } from "react-router-dom";
 import "./Card.css";
 
 const Card = ({ item, close }) => {
-  const IMG = import.meta.env.VITE_IMG_URL;
   return (
-    <Link className="link" to={`/product/${item.id}`}>
+    <Link className="link" to={`/product/${item._id}`}>
       <div className="card" onClick={close}>
         <div className="card-img">
-          {item.attributes.isNew && <span>New Season</span>}
+          {item.isNewProduct && <span>New Season</span>}
           <img
-            src={IMG + item?.attributes?.img?.data.attributes.url}
+            src={item.images[0]}
             className="first"
           />
           <img
-            src={IMG + item?.attributes?.img2?.data?.attributes?.url}
+            src={item.images[1]}
             className="second"
           />
         </div>
-        <h2>{item.attributes.title}</h2>
+        <h2>{item.title}</h2>
         <div className="prices">
           <h3 className="old-price price">
-            ₹{item?.attributes?.oldPrice || item.attributes.price + 300}
+            ₹{item.price + 300}
           </h3>
-          <h3 className="price">₹{item?.attributes?.price}</h3>
+          <h3 className="price">₹{item.price}</h3>
         </div>
       </div>
     </Link>
