@@ -12,9 +12,9 @@ const createOrder = async (req, res) => {
 };
 
 const getOrderByUser = async (req, res) => {
-  const id = req.params.id;
+  const uid = req.user._id;
   try {
-    const order = await Order.find({ user: id }).populate("products");
+    const order = await Order.find({ user: uid }).populate("products.product");
     res.status(200).json(order);
   } catch (err) {
     res.status(400).json({ error: err.message });

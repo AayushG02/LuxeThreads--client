@@ -6,7 +6,7 @@ const { createOrder, getOrderByUser } = require("../controllers/order");
 const requireAuth = require("../middleware/requireAuth");
 router.use(requireAuth);
 
-router.get("/:id", getOrderByUser);
+router.get("/", getOrderByUser);
 router.post("/create", createOrder);
 
 module.exports = router;
