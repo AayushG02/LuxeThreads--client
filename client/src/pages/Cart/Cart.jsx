@@ -8,7 +8,6 @@ import { makeRequest } from "../../../makeRequest";
 
 import { loadStripe } from "@stripe/stripe-js";
 
-
 const Cart = () => {
   const products = useSelector((state) => state.cart.products);
   const dispatch = useDispatch();
@@ -23,30 +22,40 @@ const Cart = () => {
     return total.toFixed(2);
   };
 
-  const getProductID = () => {
-    console.log(products);
-    var productID = [];
+  // const getProductID = () => {
+  //   console.log(products);
+  //   var productID = [];
+  //   products.forEach((item) => {
+  //     productID.push(item.id);
+  //   });
+  //   console.log(productID);
+  //   return productID;
+  // };
+
+  const makeProductsDoc = () => {
+    var productsDoc = [];
     products.forEach((item) => {
-      productID.push(item.id);
+      const element = {
+        product: item.id,
+        quantity: item.quantity,
+      };
+      productsDoc.push(element);
     });
-    console.log(productID);
-    return productID;
+    console.log(productsDoc);
+    return productsDoc;
   };
 
   const handlePayment = async () => {
     try {
       const orderRes = await makeRequest.post("/order/create", {
-        products: getProductID(),
+        products: makeProductsDoc(),
         totalPrice: totalPrice(),
       });
-
       const stripeRes = await makeRequest.post("/payment", {
         products,
         shippingAddressCollection: "required",
       });
-
       const stripe = await stripePromise;
-
       await stripe.redirectToCheckout({
         sessionId: stripeRes.data.id,
       });

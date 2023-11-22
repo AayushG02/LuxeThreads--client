@@ -1,3 +1,8 @@
+.card-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
 .card {
   width: 280px;
   display: flex;
@@ -53,6 +58,14 @@
   display: flex;
   align-items: center;
   gap: 10px;
+}
+.favorite {
+  margin-left: auto;
+  cursor: pointer;
+  color: #666;
+}
+.wishlisted {
+  color: red
 }
 .old-price {
   font-size: 0.8rem;

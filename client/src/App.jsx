@@ -8,6 +8,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import Success from "./pages/Success/Success";
 import Failed from "./pages/Failed/Failed";
+import Wishlist from "./pages/Wishlist/Wishlist";
 
 const Layout = () => {
   return (
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: "/cart",
         element: <Cart />,
+      },
+      {
+        path: "/wishlist",
+        element: <Wishlist />,
       },
       {
         path: "/success",

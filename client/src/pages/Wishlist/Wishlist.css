@@ -1,0 +1,7 @@
+.wishlist-products {
+  display: flex;
+  gap: 5rem;
+}
+.remove {
+  margin-bottom: 1.5rem;
+}

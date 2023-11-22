@@ -15,7 +15,7 @@ const Product = () => {
   console.log(data);
   const [quantity, setQuantity] = useState(1);
   const [selectedImg, setSelectedImg] = useState(0);
-  const handleIncrement = () => { 
+  const handleIncrement = () => {
     setQuantity((curr) => curr + 1);
   };
   const handleDecrement = () => {
