@@ -1,33 +1,27 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { addToWishlist, removeFromWishlist } from "../../redux/wishlistReducer";
+import { addToWishlist, removeFromWishlist } from "../../redux/userReducer";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import "./Card.css";
 import { makeRequest } from "../../../makeRequest";
 
 const Card = ({ item, close }) => {
-  const { wishlist } = useSelector((state) => state.wishlist);
   const dispatch = useDispatch();
-
+  const { wishlist } = useSelector((state) => state.user.user);
   const isExist = wishlist.find((product) => product._id === item._id);
 
   const handleFavorite = async () => {
     try {
-      const res = await makeRequest.post(`/user/wishlist/${item._id}`);
-
-      if (res.status === 200) {
+      if (isExist) {
+        dispatch(removeFromWishlist(item._id));
+        await makeRequest.delete(`/user/wishlist/${item._id}`);
+      } else {
         dispatch(addToWishlist(item));
+        await makeRequest.post(`/user/wishlist/${item._id}`);
       }
-    } catch (err) {
-      if (err.response.status == 409) {
-        const removeRes = await makeRequest.delete(
-          `/user/wishlist/${item._id}`
-        );
-        if (removeRes.status === 200) {
-          dispatch(removeFromWishlist(item._id));
-        }
-      }
+    } catch (error) {
+      console.log(error);
     }
   };
 

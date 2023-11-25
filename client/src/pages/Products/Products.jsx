@@ -68,7 +68,9 @@ const Products = () => {
               />
               <label htmlFor="desc">Price (Highest First)</label>
             </div>
-            <p  className="clear-filters" onClick={() => clearFilters()}>Clear Filters</p>
+            <p className="clear-filters" onClick={() => clearFilters()}>
+              Clear Filters
+            </p>
           </div>
         </form>
       </div>

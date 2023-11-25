@@ -11,6 +11,10 @@
   gap: 10px;
 }
 
+.card h2 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
 .card-img {
   width: 100%;
   height: 350px;
@@ -58,11 +62,13 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  margin-top: auto;
+  
 }
 .favorite {
   margin-left: auto;
   cursor: pointer;
-  color: #666;
+  color: #bbb;
 }
 .wishlisted {
   color: red

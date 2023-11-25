@@ -1,0 +1,115 @@
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url("../../assets/background.png");
+}
+.login-container {
+  padding: 25px;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  width: 60%;
+  height: 80%;
+  background-color: #fff;
+  border-radius: 35px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.login-left {
+  width: 60%;
+}
+.login-left img {
+  width: 100%;
+  height: 100%;
+}
+.login-right {
+  flex: 1;
+}
+.form-container {
+  padding: 1rem;
+  height: 100%;
+}
+.form-container > form {
+  margin-top: 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+.form-container > form > button {
+  margin-top: 2rem;
+}
+
+.login-header {
+  margin-top: 3rem;
+  text-align: center;
+  font-size: 3rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  font-family: "Playfair Display";
+}
+.login-subheader {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
+
+.floating-label-group {
+  position: relative;
+  width: 100%;
+}
+.login-password,
+.login-email {
+  width: 100%;
+  outline: 2px solid #eee;
+  /* margin-bottom: 3rem; */
+  transition: outline 200ms ease-in-out;
+  border-radius: 10px;
+  padding: 13px;
+  border: none;
+  color: var(--text-primary);
+  background-color: var(--bg-secondary);
+}
+
+.login-password:focus,
+.login-email:focus {
+  outline: 2px solid #333;
+}
+.floating-label {
+  position: absolute;
+  pointer-events: none;
+  top: 13px;
+  left: 13px;
+  color: #333;
+  background-color: #fff;
+  width: fit-content;
+  padding: 0 5px;
+  text-align: center;
+  opacity: 0.5;
+  font-size: 1rem;
+  transition: all 200ms ease-in-out;
+}
+.login-password:focus ~ .floating-label,
+.login-email:focus ~ .floating-label,
+.login-password:not(:focus):valid ~ .floating-label,
+.login-email:not(:focus):valid ~ .floating-label {
+  top: -13px;
+  left: 13px;
+  font-size: 14px;
+  opacity: 1;
+  color: #333;
+}
+
+.login-submit {
+  width: 100%;
+  padding: 13px;
+  border-radius: 10px;
+  border: none;
+  background-color: #333;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 200ms ease-in-out;
+}

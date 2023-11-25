@@ -1,12 +1,12 @@
-import "./Cart.css";
-import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
-
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { removeItem, resetCart } from "../../redux/cartReducer";
 import { makeRequest } from "../../../makeRequest";
-
 import { loadStripe } from "@stripe/stripe-js";
+
+import "./Cart.css";
+import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
+
 
 const Cart = () => {
   const products = useSelector((state) => state.cart.products);
@@ -21,16 +21,6 @@ const Cart = () => {
     });
     return total.toFixed(2);
   };
-
-  // const getProductID = () => {
-  //   console.log(products);
-  //   var productID = [];
-  //   products.forEach((item) => {
-  //     productID.push(item.id);
-  //   });
-  //   console.log(productID);
-  //   return productID;
-  // };
 
   const makeProductsDoc = () => {
     var productsDoc = [];

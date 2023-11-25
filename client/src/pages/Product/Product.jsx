@@ -8,11 +8,9 @@ import { addToCart } from "../../redux/cartReducer";
 const Product = () => {
   const id = useParams().id;
   const dispatch = useDispatch();
-  console.log(id);
   const { data, isLoading, isError } = useFetch(
     import.meta.env.VITE_API_URL + `/products/${id}`
   );
-  console.log(data);
   const [quantity, setQuantity] = useState(1);
   const [selectedImg, setSelectedImg] = useState(0);
   const handleIncrement = () => {

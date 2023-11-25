@@ -12,7 +12,6 @@ const ProductList = ({ type, isProducts, filters }) => {
     }&category=${selectedCategory}`;
 
   const { data, isLoading, isError } = useFetch(url);
-  console.log(data);
   return (
     <>
       <div className="featured-product-categories">
@@ -24,7 +23,7 @@ const ProductList = ({ type, isProducts, filters }) => {
             setSelectedCategory("");
           }}
         >
-          All 
+          All
         </div>
         <div
           className={`featured-item ${

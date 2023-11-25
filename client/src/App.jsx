@@ -1,5 +1,6 @@
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 
+import Login from "./pages/Login/Login";
 import Home from "./pages/Home/Home";
 import Product from "./pages/Product/Product";
 import Products from "./pages/Products/Products";
@@ -16,6 +17,14 @@ const Layout = () => {
       <Navbar />
       <Outlet />
       <Footer />
+    </div>
+  );
+};
+
+const LoginLayout = () => {
+  return (
+    <div className="app">
+      <Outlet />
     </div>
   );
 };
@@ -52,6 +61,16 @@ const router = createBrowserRouter([
       {
         path: "/failed",
         element: <Failed />,
+      },
+    ],
+  },
+  {
+    path: "/auth",
+    element: <LoginLayout />,
+    children: [
+      {
+        path: "login",
+        element: <Login />,
       },
     ],
   },
