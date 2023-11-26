@@ -1,15 +1,26 @@
 import { useState } from "react";
 import { useLogin } from "../../hooks/useLogin";
+import { useSignup } from "../../hooks/useSignup";
 
 import "./Login.css";
 import image from "../../assets/login.svg";
+import { Link, useLocation } from "react-router-dom";
 const Login = () => {
   const { login, loading, error } = useLogin();
+  const { signup, error: signupError } = useSignup();
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const handleLogin = async (e) => {
+
+  const location =
+    useLocation().pathname.split("/")[2].charAt(0).toUpperCase() +
+    useLocation().pathname.split("/")[2].slice(1);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    await login(email, password);
+    location === "Login"
+      ? await login(email, password)
+      : await signup(name, email, password);
   };
 
   return (
@@ -21,35 +32,61 @@ const Login = () => {
         <div className="login-right">
           <div className="form-container">
             <h1 className="login-header">LuxeThreads</h1>
-            {/* <p className="login-subheader">Log in</p> */}
-            <form onSubmit={handleLogin}>
+            <form onSubmit={handleSubmit}>
+              {location === "Signup" && (
+                <div className="floating-label-group">
+                  <input
+                    type="text"
+                    name="name"
+                    className="input"
+                    required
+                    value={name}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                  <span className="floating-label">Name</span>
+                </div>
+              )}
               <div className="floating-label-group">
                 <input
-                  type="email"
-                  name="email"
-                  className="login-email"
+                  type="text"
+                  name="name"
+                  className="input"
                   required
-                  autoCapitalize="true"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                 />
-                <span className="floating-label">Email</span>
+                <span className="floating-label" aria-label="email">
+                  Email
+                </span>
               </div>
               <div className="floating-label-group">
                 <input
                   type="password"
                   name="password"
-                  className="login-password"
+                  className="input"
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
-                <span className="floating-label">Password</span>
+                <span className="floating-label" aria-label="Password">
+                  Password
+                </span>
               </div>
               <button className="login-submit" type="submit" disabled={loading}>
-                {loading ? "Logging in..." : "Login"}
+                {loading ? "loading..." : location}
               </button>
             </form>
+            {(error || signupError) && (
+              <p className="error">There's something wrong...</p>
+            )}
+            <p className="no-account">
+              {location === "Login"
+                ? "Don't have an account?"
+                : "Already have an account? "}{" "}
+              <Link to={location === "Login" ? "/auth/signup" : "/auth/login"}>
+                {location === "Login" ? "Sign up" : "Login"}
+              </Link>
+            </p>
           </div>
         </div>
       </div>
@@ -67,7 +104,7 @@ const Login = () => {
     //           type="text"
     //           className="login-name"
     //           required
-    //           autoCapitalize="true"
+    //           italize="true"
     //           onChange={(e) => setUsername(e.target.value)}
     //         />
     //         <span className="floating-label">Username</span>
