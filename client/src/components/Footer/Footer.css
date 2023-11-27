@@ -31,15 +31,16 @@
   color: #444;
 }
 .bottom {
+  width: 100%;
   margin-top: 2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
 }
-.right img {
+.payment-img {
   /* height: 50px; */
-  width: 100%;
+  width: 25%;
 }
 .logo {
   color: #000;
@@ -51,7 +52,12 @@
   margin-left: 0.125rem;
   color: #666;
 }
-
+.made-with-love {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+  text-align: center;
+}
 @media screen and (max-width: 425px) {
   .footer-wrapper {
     width: 90vw;
