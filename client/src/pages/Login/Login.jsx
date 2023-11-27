@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useLogin } from "../../hooks/useLogin";
 import { useSignup } from "../../hooks/useSignup";
 
@@ -6,6 +6,7 @@ import "./Login.css";
 import image from "../../assets/login.svg";
 import { Link, useLocation } from "react-router-dom";
 const Login = () => {
+  const formRef = useRef(null);
   const { login, loading, error } = useLogin();
   const { signup, error: signupError } = useSignup();
   const [name, setName] = useState("");
@@ -32,7 +33,7 @@ const Login = () => {
         <div className="login-right">
           <div className="form-container">
             <h1 className="login-header">LuxeThreads</h1>
-            <form onSubmit={handleSubmit}>
+            <form ref={formRef} onSubmit={handleSubmit}>
               {location === "Signup" && (
                 <div className="floating-label-group">
                   <input
@@ -41,7 +42,7 @@ const Login = () => {
                     className="input"
                     required
                     value={name}
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e) => setName(e.target.value)}
                   />
                   <span className="floating-label">Name</span>
                 </div>
@@ -52,8 +53,8 @@ const Login = () => {
                   name="name"
                   className="input"
                   required
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
                 <span className="floating-label" aria-label="email">
                   Email
@@ -76,10 +77,18 @@ const Login = () => {
                 {loading ? "loading..." : location}
               </button>
             </form>
+            {/* add error */}
             {(error || signupError) && (
-              <p className="error">There's something wrong...</p>
+              <p className="error">error to be added here</p>
             )}
-            <p className="no-account">
+            <p
+              className="no-account"
+              onClick={() => {
+                setEmail("");
+                setPassword("");
+                setName("");
+              }}
+            >
               {location === "Login"
                 ? "Don't have an account?"
                 : "Already have an account? "}{" "}

@@ -4,14 +4,35 @@ import Card from "../Card/Card";
 import "./ProductList.css";
 const ProductList = ({ type, isProducts, filters }) => {
   const [selectedCategory, setSelectedCategory] = useState("");
+  if (isProducts) {
+    var { sort, priceRange } = filters;
+  }
 
   var url =
     import.meta.env.VITE_API_URL +
     `/products?gender=${
       type === 1 ? "male" : "female"
     }&category=${selectedCategory}`;
-
-  const { data, isLoading, isError } = useFetch(url);
+  if (type === 3) {
+    url =
+      import.meta.env.VITE_API_URL + `/products?category=${selectedCategory}`;
+  }
+  var { data, isLoading, isError } = useFetch(url);
+  if (type === 3) {
+    data = data?.filter((item) => item.isNewProduct === true);
+  }
+  if (isProducts) {
+    data = data?.filter((item) => item.price <= priceRange);
+    data = data?.sort((a, b) => {
+      if (sort === "asc") {
+        return a.price - b.price;
+      } else if (sort === "desc") {
+        return b.price - a.price;
+      } else {
+        return 0;
+      }
+    });
+  }
   return (
     <>
       <div className="featured-product-categories">
@@ -47,7 +68,9 @@ const ProductList = ({ type, isProducts, filters }) => {
         </div>
       </div>
       <div className="featured-products-list">
-        {isError
+        {data?.length === 0
+          ? "Sorry no products available"
+          : isError
           ? "Something went wrong"
           : isLoading
           ? "Loading..."
