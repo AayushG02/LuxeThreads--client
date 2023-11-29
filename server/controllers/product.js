@@ -10,7 +10,7 @@ const getAllProducts = async (req, res) => {
 };
 
 const getProductsByQuery = async (req, res) => {
-  const {category, gender} = req.query;
+  const { category, gender, name } = req.query;
   try {
     let query = {};
 
@@ -21,7 +21,11 @@ const getProductsByQuery = async (req, res) => {
     if (gender) {
       query.gender = gender;
     }
-    console.log(query)
+
+    if (name) {
+      query.title = { $regex: name, $options: "i" };
+    }
+
     const products = await Product.find(query);
     res.status(200).json(products);
   } catch (err) {
@@ -29,7 +33,7 @@ const getProductsByQuery = async (req, res) => {
   }
 };
 
-const getProductById = async(req, res) => {
+const getProductById = async (req, res) => {
   const id = req.params.id;
   try {
     const product = await Product.findById(id);
@@ -37,7 +41,7 @@ const getProductById = async(req, res) => {
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
-}
+};
 
 // const getProductByCategory = async (req, res) => {
 //   const category = req.params.category;
@@ -97,4 +101,4 @@ module.exports = {
   getProductsByQuery,
   getProductById,
   createProduct,
-}
+};
