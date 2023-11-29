@@ -1,0 +1,19 @@
+.products {
+  width: 80%;
+  margin: 4rem auto;
+}
+.products > h1 {
+  font-size: 2rem;
+}
+.search-result {
+  width: 100%;
+  margin: 2rem auto;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 5rem;
+}
+.search-result > h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}

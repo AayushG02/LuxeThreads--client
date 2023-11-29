@@ -3,13 +3,17 @@ import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Login from "./pages/Login/Login";
 import Home from "./pages/Home/Home";
 import Product from "./pages/Product/Product";
+import ProductSearch from "./pages/ProductSearch/ProductSearch";
 import Products from "./pages/Products/Products";
 import Cart from "./pages/Cart/Cart";
+import Orders from "./pages/Orders/Orders";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import Success from "./pages/Success/Success";
 import Failed from "./pages/Failed/Failed";
 import Wishlist from "./pages/Wishlist/Wishlist";
+
+import "./App.css";
 
 const Layout = () => {
   return (
@@ -39,6 +43,10 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
+        path: "/products",
+        element: <ProductSearch />,
+      },
+      {
         path: "/products/:id",
         element: <Products />,
       },
@@ -53,6 +61,10 @@ const router = createBrowserRouter([
       {
         path: "/wishlist",
         element: <Wishlist />,
+      },
+      {
+        path: "/orders",
+        element: <Orders />,
       },
       {
         path: "/success",

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Search from "../Search/Search";
-import Wishlist from "../../pages/Wishlist/Wishlist";
+import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import SearchSharpIcon from "@mui/icons-material/SearchSharp";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
@@ -52,15 +52,19 @@ const Navbar = () => {
             </div>
           </div>
           <div className="navbar-right">
+            {isSearchOpened && <Search toggle={toggleSearch} />}
             <div className="search-icon" onClick={toggleSearch}>
               <SearchSharpIcon />
             </div>
-            <Link className="link" to="/wishlist">
+            <div className="profile-icon">
+              <PersonOutlinedIcon />
+            </div>
+            <Link className="wishlist-link link" to="/wishlist">
               <div className="wishlist-icon">
                 <FavoriteBorderIcon onClick={toggleWishlist} />
               </div>
             </Link>
-            <Link className="link" to="/cart">
+            <Link className="cart-link link" to="/cart">
               <div className="cart-icon">
                 <ShoppingBagOutlinedIcon />
                 <span>{products.length}</span>
@@ -69,7 +73,6 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
-      {isSearchOpened && <Search toggle={toggleSearch} />}
       {isSidebarOpened && (
         <aside className="sidebar">
           <div className="sidebar-wrapper">
@@ -91,6 +94,21 @@ const Navbar = () => {
             <div className="sidebar-item">
               <Link className="link" to="/products/3">
                 <div>New Season</div>
+              </Link>
+            </div>
+            <div className="sidebar-item">
+              <Link className="link" to="/wishlist">
+                <div>Wishlist</div>
+              </Link>
+            </div>
+            <div className="sidebar-item">
+              <Link className="link" to="/cart">
+                <div>Cart</div>
+              </Link>
+            </div>
+            <div className="sidebar-item">
+              <Link className="link" to="/orders">
+                <div>Orders</div>
               </Link>
             </div>
           </div>

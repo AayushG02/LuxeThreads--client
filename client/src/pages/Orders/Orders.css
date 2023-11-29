@@ -1,0 +1,46 @@
+.order-container {
+  width: 80%;
+  margin: 2rem auto;
+  
+}
+.order-header {
+  font-size: 2rem;
+  font-family: "Playfair Display";
+}
+.order-list {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+}
+
+.order-item-header {
+  margin-bottom: 1rem;
+}
+.order-item-products {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+}
+.order-item-product {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.order-item-product img {
+  height: 200px;
+}
+
+.order-item-product-details h3 {
+  font-size: 1.5rem;
+  font-family: "Playfair Display";
+  margin-bottom: 0.875rem;
+}
+
+@media screen and (width <= 425px) {
+  .order-item-product {
+    justify-content: center;
+  }
+}
