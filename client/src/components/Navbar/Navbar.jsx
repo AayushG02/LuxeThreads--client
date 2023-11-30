@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Search from "../Search/Search";
+import ProfileMenu from "../ProfileMenu/ProfileMenu";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import SearchSharpIcon from "@mui/icons-material/SearchSharp";
 import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
@@ -11,7 +12,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 const Navbar = () => {
   const [isSidebarOpened, setIsSidebarOpened] = useState(false);
   const [isSearchOpened, setIsSearchOpened] = useState(false);
-  const [isWishlistOpened, setIsWishlistOpened] = useState(false);
+  const [isProfileOpened, setIsProfileOpened] = useState(false);
   const products = useSelector((state) => state.cart.products);
 
   const toggleSidebar = () => {
@@ -19,9 +20,24 @@ const Navbar = () => {
   };
   const toggleSearch = () => {
     setIsSearchOpened(!isSearchOpened);
+    const timeoutID = setTimeout(() => {
+      setIsSearchOpened(false);
+    }, 10000);
+    return () => {
+      clearTimeout(timeoutID);
+    };
   };
-  const toggleWishlist = () => {
-    setIsWishlistOpened(!isWishlistOpened);
+  const showProfile = () => {
+    setIsProfileOpened(true);
+    const timeoutID = setTimeout(() => {
+      setIsProfileOpened(false);
+    }, 10000);
+    return () => {
+      clearTimeout(timeoutID);
+    };
+  };
+  const hideProfile = () => {
+    setIsProfileOpened(false);
   };
 
   return (
@@ -56,12 +72,13 @@ const Navbar = () => {
             <div className="search-icon" onClick={toggleSearch}>
               <SearchSharpIcon />
             </div>
-            <div className="profile-icon">
+            {isProfileOpened && <ProfileMenu hide={hideProfile} />}
+            <div className="profile-icon" onMouseEnter={showProfile}>
               <PersonOutlinedIcon />
             </div>
             <Link className="wishlist-link link" to="/wishlist">
               <div className="wishlist-icon">
-                <FavoriteBorderIcon onClick={toggleWishlist} />
+                <FavoriteBorderIcon />
               </div>
             </Link>
             <Link className="cart-link link" to="/cart">
