@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 
 import Login from "./pages/Login/Login";
 import Home from "./pages/Home/Home";
@@ -18,6 +19,7 @@ import "./App.css";
 const Layout = () => {
   return (
     <div className="app">
+      <Toaster />
       <Navbar />
       <Outlet />
       <Footer />
@@ -28,6 +30,7 @@ const Layout = () => {
 const LoginLayout = () => {
   return (
     <div className="app">
+      <Toaster />
       <Outlet />
     </div>
   );
@@ -86,8 +89,8 @@ const router = createBrowserRouter([
       },
       {
         path: "signup",
-        element: <Login />
-      }
+        element: <Login />,
+      },
     ],
   },
 ]);
