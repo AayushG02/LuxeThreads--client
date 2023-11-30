@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { setUser } from "../redux/userReducer";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 export const useLogin = () => {
   const dispatch = useDispatch();
@@ -12,8 +13,6 @@ export const useLogin = () => {
 
   const login = async (email, password) => {
     setLoading(true);
-    setError(false);
-
     try {
       const res = await axios.post(
         import.meta.env.VITE_API_URL + "/user/login",
@@ -26,7 +25,6 @@ export const useLogin = () => {
       );
 
       if (res.status === 200) {
-        console.log(res.data);
         localStorage.setItem("user", JSON.stringify(res.data));
 
         dispatch(setUser(res.data));
@@ -35,12 +33,18 @@ export const useLogin = () => {
         setError(false);
 
         if (!loading && !error) {
+          toast.success("Login successful!", {
+            duration: 2000,
+          });
           navigate("/");
         }
       }
     } catch (error) {
       setLoading(false);
       setError(error);
+      toast.error(error.response.data.error || "An error occurred!", {
+        duration: 2000,
+      });
     }
   };
 

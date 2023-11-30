@@ -17,7 +17,12 @@ export const userReducer = createSlice({
       state.user = action.payload;
     },
     resetUser: (state, action) => {
-      state.user = {};
+      state.user = {
+        id: "",
+        name: "",
+        wishlist: [],
+        token: "",
+      };
     },
     addToWishlist: (state, action) => {
       state.user.wishlist.push(action.payload);

@@ -2,11 +2,15 @@ import React, { useState } from "react";
 import "./Product.css";
 import { useParams } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
+import toast from "react-hot-toast";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/cartReducer";
+import { useSelector } from "react-redux";
+
 const Product = () => {
   const id = useParams().id;
+  const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const { data, isLoading, isError } = useFetch(
     import.meta.env.VITE_API_URL + `/products/${id}`
@@ -47,7 +51,13 @@ const Product = () => {
           </div>
           <button
             className="add-cart"
-            onClick={() =>
+            onClick={() => {
+              if (user.id === "") {
+                toast.error("Please login to add to cart", {
+                  duration: 2000,
+                });
+                return;
+              }
               dispatch(
                 addToCart({
                   id: data._id,
@@ -57,8 +67,11 @@ const Product = () => {
                   img: data.images[0],
                   quantity,
                 })
-              )
-            }
+              );
+              toast.success("Product added to cart!", {
+                duration: 2000,
+              });
+            }}
           >
             <AddShoppingCartOutlinedIcon />
             add to cart

@@ -10,16 +10,15 @@ const Orders = () => {
     loading,
     error,
   } = useFetch(`${import.meta.env.VITE_API_URL}/order`);
-  console.log(products && products[0].products[0]);
   return (
     <div className="order-container">
       <h1 className="order-header">Your Orders</h1>
       {loading && <p>Loading...</p>}
       {error && <p>Error: {error.message}</p>}
-      {products && (
+      {products?.length !== 0 ? (
         <div className="order-list">
-          {products.map((item) => (
-            <div className="order-item">
+          {products?.map((item) => (
+            <div key={item._id} className="order-item">
               <div className="order-item-header">
                 <h3>Order Id: {item._id}</h3>
                 <h3>
@@ -31,8 +30,8 @@ const Orders = () => {
                 <h3>Total Price: {item.totalPrice}</h3>
               </div>
               <div className="order-item-products">
-                {item.products.map((product) => (
-                  <div className="order-item-product">
+                {item.products.map((product, index) => (
+                  <div key={index} className="order-item-product">
                     <img src={product.product.images[0]} alt="" />
                     <div className="order-item-product-details">
                       <h3>{product.product.title}</h3>
@@ -45,6 +44,8 @@ const Orders = () => {
             </div>
           ))}
         </div>
+      ) : (
+        <h1>No orders yet</h1>
       )}
     </div>
   );

@@ -32,7 +32,9 @@ const Login = () => {
         </div>
         <div className="login-right">
           <div className="form-container">
-            <h1 className="login-header">LuxeThreads</h1>
+            <Link className="link" to="/">
+              <h1 className="login-header">LuxeThreads</h1>
+            </Link>
             <form ref={formRef} onSubmit={handleSubmit}>
               {location === "Signup" && (
                 <div className="floating-label-group">
@@ -49,8 +51,8 @@ const Login = () => {
               )}
               <div className="floating-label-group">
                 <input
-                  type="text"
-                  name="name"
+                  type="email"
+                  name="email"
                   className="input"
                   required
                   value={email}
@@ -77,10 +79,6 @@ const Login = () => {
                 {loading ? "loading..." : location}
               </button>
             </form>
-            {/* add error */}
-            {(error || signupError) && (
-              <p className="error">error to be added here</p>
-            )}
             <p
               className="no-account"
               onClick={() => {
