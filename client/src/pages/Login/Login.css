@@ -10,8 +10,8 @@
   display: flex;
   flex-direction: row;
   gap: 3rem;
-  width: 60%;
-  height: 80%;
+  width: 80%;
+  min-height: 80%;
   background-color: #fff;
   border-radius: 35px;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -117,4 +117,52 @@
 .no-account {
   text-align: center;
   margin-top: 2rem;
+}
+
+@media screen and (max-width: 1023px) {
+  .login-container {
+    width: 90%;
+  }
+}
+@media screen and (max-width: 767px) {
+  .login-container {
+    backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+    background-color: transparent;
+    box-shadow: none;
+  }
+  .login-left {
+    display: none;
+  }
+  .login-right {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .form-container {
+    width: 90%;
+  }
+  .form-container > form {
+    margin-top: 0;
+  }
+  .login-header {
+    font-size: 2rem;
+  }
+  .login-subheader {
+    font-size: 1rem;
+  }
+  .no-account {
+    margin-top: 1rem;
+  }
+}
+@media screen and (max-width: 425px) {
+  .login-container {
+    padding: 0;
+  }
+  .form-container {
+    width: 100%;
+    padding: 0;
+  }
+  
 }

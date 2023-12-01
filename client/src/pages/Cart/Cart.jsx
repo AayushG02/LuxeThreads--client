@@ -158,7 +158,7 @@ const Cart = () => {
       ) : (
         <h1>
           Please <Link to="/auth/login">Login</Link> or{" "}
-          <Link to="/auth/signup">Signup</Link> to see your wishlist
+          <Link to="/auth/signup">Signup</Link> to see your cart
         </h1>
       )}
     </div>

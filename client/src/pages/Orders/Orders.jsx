@@ -3,13 +3,17 @@ import "./Orders.css";
 import { Link } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 import { formatDistanceToNow } from "date-fns";
+import { useSelector } from "react-redux";
 
 const Orders = () => {
-  const {
-    data: products,
-    loading,
-    error,
-  } = useFetch(`${import.meta.env.VITE_API_URL}/order`);
+  const { user } = useSelector((state) => state.user);
+  if (user.id !== "") {
+    var {
+      data: products,
+      loading,
+      error,
+    } = useFetch(`${import.meta.env.VITE_API_URL}/order`);
+  }
   return (
     <div className="order-container">
       <h1 className="order-header">Your Orders</h1>

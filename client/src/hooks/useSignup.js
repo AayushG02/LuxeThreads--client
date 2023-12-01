@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { setUser } from "../redux/userReducer";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 export const useSignup = () => {
   const dispatch = useDispatch();
@@ -34,6 +35,8 @@ export const useSignup = () => {
         setLoading(false);
         setError(false);
 
+        toast.success("Signup successful!");
+
         if (!loading && !error) {
           navigate("/");
         }
@@ -41,6 +44,7 @@ export const useSignup = () => {
     } catch (error) {
       setLoading(false);
       setError(error);
+      toast.error(error.response.data.error || "An error occurred!");
     }
   };
   return { signup, loading, error };
