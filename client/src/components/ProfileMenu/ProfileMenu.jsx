@@ -34,7 +34,8 @@ const ProfileMenu = ({ hide }) => {
         </>
       ) : (
         <span>
-          <Link href="/auth/login">Login</Link> or <Link href="/auth/signup">Signup</Link>
+          <Link to="/auth/login">Login</Link> or{" "}
+          <Link to="/auth/signup">Signup</Link>
         </span>
       )}
     </div>
