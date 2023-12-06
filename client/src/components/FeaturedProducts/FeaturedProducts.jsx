@@ -22,7 +22,7 @@ const FeaturedProducts = ({ type }) => {
         </div>
       </div>
       <div className="featured-right">
-        <ProductList type={type} isProducts = {false} />
+        <ProductList type={type} isProducts={false} />
       </div>
     </div>
   );
