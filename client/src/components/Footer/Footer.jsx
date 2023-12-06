@@ -1,5 +1,5 @@
 import React from "react";
-import paymentImg from "../../assets/payment.png";
+import paymentImg from "../../assets/payment.webp";
 import "./Footer.css";
 import { Link } from "react-router-dom";
 

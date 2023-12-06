@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ArrowForwardOutlinedIcon from "@mui/icons-material/ArrowForwardOutlined";
 import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
 
-import carousel1 from "../../assets/carousel1.jpeg";
+import carousel1 from "../../assets/carousel1.webp";
 import carousel2 from "../../assets/carousel2.webp";
 import carousel3 from "../../assets/carousel3.webp";
 

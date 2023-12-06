@@ -2,8 +2,8 @@ import React from "react";
 import "./FeaturedProducts.css";
 import ProductList from "../ProductList/ProductList";
 import { Link } from "react-router-dom";
-import forHim from "../../assets/forhim.jpg";
-import forHer from "../../assets/forher.jpg";
+import forHim from "../../assets/forhim.webp";
+import forHer from "../../assets/forher.webp";
 
 const FeaturedProducts = ({ type }) => {
   const style =
