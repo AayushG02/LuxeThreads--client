@@ -5,13 +5,21 @@ import { addToWishlist, removeFromWishlist } from "../../redux/userReducer";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import "./Card.css";
 import { makeRequest } from "../../../makeRequest";
+import toast from "react-hot-toast";
 
 const Card = ({ item, close }) => {
   const dispatch = useDispatch();
   const { wishlist } = useSelector((state) => state.user.user);
+  const { user } = useSelector((state) => state.user);
   const isExist = wishlist.find((product) => product._id === item._id);
 
   const handleFavorite = async () => {
+    if (user.id === "") {
+      toast.error("Please login to add to wishlist", {
+        duration: 2000,
+      });
+      return;
+    }
     try {
       if (isExist) {
         dispatch(removeFromWishlist(item._id));
