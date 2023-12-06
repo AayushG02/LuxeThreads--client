@@ -3,7 +3,7 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-image: url("../../assets/background.png");
+  background-image: url("../../assets/background.webp");
 }
 .login-container {
   padding: 25px;
@@ -88,7 +88,8 @@
   font-size: 1rem;
   transition: all 200ms ease-in-out;
 }
-.input:focus ~ .floating-label, .input:not(:focus):valid ~ .floating-label {
+.input:focus ~ .floating-label,
+.input:not(:focus):valid ~ .floating-label {
   top: -13px;
   left: 13px;
   font-size: 14px;
@@ -112,7 +113,6 @@
   margin-top: 1rem;
   text-align: center;
   color: red;
-  
 }
 .no-account {
   text-align: center;
@@ -127,7 +127,7 @@
 @media screen and (max-width: 767px) {
   .login-container {
     backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     background-color: transparent;
     box-shadow: none;
   }
@@ -164,5 +164,4 @@
     width: 100%;
     padding: 0;
   }
-  
 }
