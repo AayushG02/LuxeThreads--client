@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 import toast from "react-hot-toast";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/cartReducer";
 import { useSelector } from "react-redux";
@@ -45,9 +47,15 @@ const Product = () => {
         <div className="temp">
           <div className="product-quantity">
             <span>Quantity</span>
-            <button onClick={() => handleDecrement()}>-</button>
-            <span>{quantity}</span>
-            <button onClick={() => handleIncrement()}>+</button>
+            <div className="quantity-btns">
+              <button onClick={() => handleIncrement()}>
+                <AddIcon />
+              </button>
+              <span>{quantity}</span>
+              <button onClick={() => handleDecrement()}>
+                <RemoveIcon />
+              </button>
+            </div>
           </div>
           <button
             className="add-cart"
