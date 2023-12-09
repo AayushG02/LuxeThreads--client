@@ -27,7 +27,7 @@ Welcome to LuxeThreads, an elegant and efficient e-commerce store built using th
 Clone repository
 
 ```bash
-  git clone https://github.com/your-username/luxethreads.git
+git clone https://github.com/your-username/luxethreads.git
 ```
 Install dependencies for the backend and frontend:
 
