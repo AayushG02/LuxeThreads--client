@@ -4,6 +4,10 @@ Welcome to LuxeThreads, an elegant and efficient e-commerce store built using th
 
 <a href="https://lh3.googleusercontent.com/drive-viewer/AK7aPaBL4T4DVHwfrpgUyc58PMtyxum5v4T10VDqMf3dODo_Ah5qGibow-3Jsg8DQwMbArWwSwjJGewjIyIfT_9mWeHesGR_3Q=s1600?source=screenshot.guru"> <img src="https://lh3.googleusercontent.com/drive-viewer/AK7aPaBL4T4DVHwfrpgUyc58PMtyxum5v4T10VDqMf3dODo_Ah5qGibow-3Jsg8DQwMbArWwSwjJGewjIyIfT_9mWeHesGR_3Q=s1600" /> </a>
 
+### <a href="https://luxethreads.netlify.app"> Live Demo </a>
+`email: test@gmail.com`
+`password: test`
+
 ## Features
 
 - Efficient e-commerce store with Cloudinary-optimized images for a 50% faster content load time.
