@@ -1,7 +1,8 @@
-# LuxeThreads
+# <a href="https://luxethreads.netlify.app">LuxeThreads</a>
 
 Welcome to LuxeThreads, an elegant and efficient e-commerce store built using the MERN stack with various technologies for enhanced performance and security.
 
+<a href="https://lh3.googleusercontent.com/drive-viewer/AK7aPaBL4T4DVHwfrpgUyc58PMtyxum5v4T10VDqMf3dODo_Ah5qGibow-3Jsg8DQwMbArWwSwjJGewjIyIfT_9mWeHesGR_3Q=s1600?source=screenshot.guru"> <img src="https://lh3.googleusercontent.com/drive-viewer/AK7aPaBL4T4DVHwfrpgUyc58PMtyxum5v4T10VDqMf3dODo_Ah5qGibow-3Jsg8DQwMbArWwSwjJGewjIyIfT_9mWeHesGR_3Q=s1600" /> </a>
 
 ## Features
 
