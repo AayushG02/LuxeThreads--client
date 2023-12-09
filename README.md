@@ -44,3 +44,55 @@ To run this project, you will need to add the following environment variables to
 `SECRET`
 
 `STRIPE_SECRET_KEY`
+
+
+## API Reference
+
+### User
+
+#### Log in
+```http
+POST /api/user/login
+```
+
+#### Sign up
+
+```http
+POST /api/user/signup
+```
+
+#### Get wishlist
+
+```http
+GET /api/user/wishlist/
+```
+
+#### Add to wishlist
+
+```http
+POST /api/user/wishlist/:itemID
+```
+
+#### Remove an item from the wishlist
+
+```http
+DELETE /api/user/wishlist/:itemID
+```
+
+### Products
+
+#### Get all products
+
+```http
+GET /api/products/
+```
+#### Get single product
+
+```http
+GET /api/products/:id
+```
+#### Add product
+
+```http
+POST /api/products/create
+```
