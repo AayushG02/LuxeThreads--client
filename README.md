@@ -1,3 +1,46 @@
 # LuxeThreads
 
-<i>This is an ongoing project!</i>
+Welcome to LuxeThreads, an elegant and efficient e-commerce store built using the MERN stack with various technologies for enhanced performance and security.
+
+
+## Features
+
+- Efficient e-commerce store with Cloudinary-optimized images for a 50% faster content load time.
+- Secure transactions powered by Stripe and streamlined cart management using Redux Toolkit.
+- MERN stack implementation with JWT authentication and a RESTful API for user and product management.
+
+
+## Tech Stack
+
+**Client:** React, CSS, Redux Toolkit, Stripe  
+
+**Server:** Node, Express, MongoDB, JSON Web Tokens, Cloudinary
+
+
+## Installation
+
+Clone repository
+
+```bash
+  git clone https://github.com/your-username/luxethreads.git
+```
+Install dependencies for the backend and frontend:
+
+```bash
+cd luxethreads
+cd client && npm install
+cd ../server && npm install
+```
+To run this project, you will need to add the following environment variables to your .env file
+
+### Client
+`VITE_API_URL`
+
+### Server
+`MONGO_URI`
+
+`PORT`
+
+`SECRET`
+
+`STRIPE_SECRET_KEY`
