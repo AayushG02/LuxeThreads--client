@@ -179,9 +179,6 @@
   .form-container {
     width: 90%;
   }
-  .form-container > form {
-    margin-top: 0;
-  }
   .login-header {
     font-size: 2rem;
   }
