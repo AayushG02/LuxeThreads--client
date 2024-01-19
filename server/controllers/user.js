@@ -28,7 +28,22 @@ const signupUser = async (req, res) => {
     const token = createToken(user._id);
     res
       .status(200)
-      .json({ id: user._id, name: user.name, wishlist: user.wishlist, token });;
+      .json({ id: user._id, name: user.name, wishlist: user.wishlist, token });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+const googleLoginUser = async (req, res) => {
+  const { name, email } = req.body;
+
+  try {
+    const user = await User.googleLogin(name, email);
+    await user.populate("wishlist");
+    const token = createToken(user._id);
+    res
+      .status(200)
+      .json({ id: user._id, name: user.name, wishlist: user.wishlist, token });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -77,6 +92,7 @@ const removeItemFromWishlist = async (req, res) => {
 module.exports = {
   signupUser,
   loginUser,
+  googleLoginUser,
   addToWishlist,
   getWishlist,
   removeItemFromWishlist,

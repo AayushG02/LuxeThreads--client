@@ -3,6 +3,7 @@ const router = express.Router();
 const {
   loginUser,
   signupUser,
+  googleLoginUser,
   addToWishlist,
   getWishlist,
   removeItemFromWishlist,
@@ -12,7 +13,7 @@ const requireAuth = require("../middleware/requireAuth");
 // Public routes (no authentication required)
 router.post("/login", loginUser);
 router.post("/signup", signupUser);
-
+router.post("/googlelogin", googleLoginUser);
 // Routes below this middleware require authentication
 router.use(requireAuth);
 

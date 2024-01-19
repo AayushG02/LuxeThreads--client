@@ -15,7 +15,10 @@ const userSchema = new Schema(
     },
     passwordHash: {
       type: String,
-      required: true,
+    },
+    isGoogle: {
+      type: Boolean,
+      default: false,
     },
     wishlist: [
       {
@@ -29,6 +32,11 @@ const userSchema = new Schema(
 
 userSchema.statics.signup = async function (name, email, password) {
   const exists = await this.findOne({ email });
+  if (exists.isGoogle) {
+    throw Error(
+      "This account is already registered with Google. Please login with Google."
+    );
+  }
   if (exists) {
     throw Error("Email already exists");
   }
@@ -41,6 +49,11 @@ userSchema.statics.signup = async function (name, email, password) {
 
 userSchema.statics.login = async function (email, password) {
   const user = await this.findOne({ email });
+  if (user.isGoogle) {
+    throw Error(
+      "This account is already registered with Google. Please login with Google."
+    );
+  }
   if (!user) {
     throw Error("Incorrect email");
   }
@@ -49,6 +62,16 @@ userSchema.statics.login = async function (email, password) {
     throw Error("Incorrect password");
   }
   return user;
+};
+
+userSchema.statics.googleLogin = async function (name, email) {
+  const user = await this.findOne({ email });
+  if (!user) {
+    const user = await this.create({ name, email, isGoogle: true });
+    return user;
+  } else {
+    return user;
+  }
 };
 
 module.exports = mongoose.model("User", userSchema);
