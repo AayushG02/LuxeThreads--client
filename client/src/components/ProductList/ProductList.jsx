@@ -73,7 +73,7 @@ const ProductList = ({ type, isProducts, filters }) => {
           : isError
           ? "Something went wrong"
           : isLoading
-          ? "Loading..."
+          ? "Please wait, the server is hosted on free services, so it may take some time to load the data."
           : data?.map((item) => {
               return <Card key={item._id} item={item} />;
             })}
