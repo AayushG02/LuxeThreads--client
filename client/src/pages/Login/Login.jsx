@@ -102,9 +102,24 @@ const Login = () => {
                   Password
                 </span>
               </div>
-              <button className="login-submit" type="submit" disabled={loading}>
-                {loading ? "loading..." : location}
-              </button>
+              <div className="buttons">
+                <button
+                  className="login-submit test-acc"
+                  type="submit"
+                  disabled={loading}
+                >
+                  {loading ? "loading..." : location}
+                </button>
+                {location === "Login" && <button
+                  className="login-submit"
+                  onClick={() => {
+                    setEmail("test@gmail.com");
+                    setPassword("test");
+                  }}
+                >
+                  Use Test Account
+                </button>}
+              </div>
             </form>
             <p
               className="no-account"
