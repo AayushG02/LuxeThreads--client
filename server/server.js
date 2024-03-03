@@ -16,6 +16,9 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use("/api/test", (req, res) => {
+  res.send("API is working");
+});
 app.use("/api/user", userRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/order", orderRoutes);
