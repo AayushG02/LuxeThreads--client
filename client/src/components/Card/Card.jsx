@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { addToWishlist, removeFromWishlist } from "../../redux/userReducer";
@@ -12,6 +12,7 @@ const Card = ({ item, close }) => {
   const { wishlist } = useSelector((state) => state.user.user);
   const { user } = useSelector((state) => state.user);
   const isExist = wishlist.find((product) => product._id === item._id);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   const handleFavorite = async () => {
     if (user.id === "") {
@@ -40,7 +41,12 @@ const Card = ({ item, close }) => {
           <div className="card" onClick={close}>
             <div className="card-img">
               {item?.isNewProduct && <span>New Season</span>}
-              <img src={item?.images[0]} className="first" />
+              {!imageLoaded && <div className="skeleton-img"></div>}
+              <img
+                src={item?.images[0]}
+                className="first"
+                onLoad={() => setImageLoaded(true)}
+              />
               <img src={item?.images[1]} className="second" />
             </div>
             <h2>{item?.title}</h2>
