@@ -89,20 +89,6 @@
   gap: 2.5rem;
 }
 
-/* @media screen and (width: 768px) {
-  .product-desc {
-    text-align: justify;
-  }
-  .preview-img img {
-    width: 7rem;
-  }
-  .selected-img img {
-    width: 25rem;
-  }
-  .temp {
-    justify-content: center;
-  }
-} */
 @media screen and (width <= 1024px) {
   .product-container {
     width: 90vw;
@@ -141,7 +127,7 @@
     width: 100%;
   }
   .selected-img img {
-    width: 20rem;
+    width: 18rem;
   }
 }
 @media screen and (max-width: 320px) {
