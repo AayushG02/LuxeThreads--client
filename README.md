@@ -1,4 +1,4 @@
-# <a href="https://luxethreads.netlify.app">LuxeThreads</a>
+# <a href="https://luxethreads.vercel.app">LuxeThreads</a>
 
 Welcome to LuxeThreads, an elegant and efficient e-commerce store built using the MERN stack with various technologies for enhanced performance and security.
 
