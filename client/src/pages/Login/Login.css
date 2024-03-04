@@ -98,7 +98,11 @@
 }
 
 .login-submit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-top: 1rem;
+  height: 45px;
   width: 100%;
   padding: 13px;
   border-radius: 10px;

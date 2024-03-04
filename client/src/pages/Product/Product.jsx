@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Product.css";
+import SkeletonProductPage from "../../components/Skeleton/SkeletonProductPage";
 import { useParams } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 import toast from "react-hot-toast";
@@ -27,66 +28,72 @@ const Product = () => {
   };
 
   return (
-    <div className="product-container">
-      <div className="product-left">
-        <div className="preview-img">
-          <img src={data?.images[0]} onClick={() => setSelectedImg(0)} />
-          <img src={data?.images[1]} onClick={() => setSelectedImg(1)} />
-        </div>
-        <div className="selected-img">
-          <img src={data?.images[selectedImg]} alt="" />
-        </div>
-      </div>
-      <div className="product-right">
-        <div className="product-title">{data?.title}</div>
-        <div className="product-price">
-          <span className="product-old-price">₹{data?.price + 300}</span>₹
-          {data?.price}
-        </div>
-        <div className="product-desc">{data?.description}</div>
-        <div className="temp">
-          <div className="product-quantity">
-            <span>Quantity</span>
-            <div className="quantity-btns">
-              <button onClick={() => handleIncrement()}>
-                <AddIcon />
-              </button>
-              <span>{quantity}</span>
-              <button onClick={() => handleDecrement()}>
-                <RemoveIcon />
+    <>
+      {isLoading ? (
+        <SkeletonProductPage />
+      ) : (
+        <div className="product-container">
+          <div className="product-left">
+            <div className="preview-img">
+              <img src={data?.images[0]} onClick={() => setSelectedImg(0)} />
+              <img src={data?.images[1]} onClick={() => setSelectedImg(1)} />
+            </div>
+            <div className="selected-img">
+              <img src={data?.images[selectedImg]} alt="" />
+            </div>
+          </div>
+          <div className="product-right">
+            <div className="product-title">{data?.title}</div>
+            <div className="product-price">
+              <span className="product-old-price">₹{data?.price + 300}</span>₹
+              {data?.price}
+            </div>
+            <div className="product-desc">{data?.description}</div>
+            <div className="temp">
+              <div className="product-quantity">
+                <span>Quantity</span>
+                <div className="quantity-btns">
+                  <button onClick={() => handleIncrement()}>
+                    <AddIcon />
+                  </button>
+                  <span>{quantity}</span>
+                  <button onClick={() => handleDecrement()}>
+                    <RemoveIcon />
+                  </button>
+                </div>
+              </div>
+              <button
+                className="add-cart"
+                onClick={() => {
+                  if (user.id === "") {
+                    toast.error("Please login to add to cart", {
+                      duration: 2000,
+                    });
+                    return;
+                  }
+                  dispatch(
+                    addToCart({
+                      id: data._id,
+                      title: data.title,
+                      description: data.description,
+                      price: data.price,
+                      img: data.images[0],
+                      quantity,
+                    })
+                  );
+                  toast.success("Product added to cart!", {
+                    duration: 2000,
+                  });
+                }}
+              >
+                <AddShoppingCartOutlinedIcon />
+                add to cart
               </button>
             </div>
           </div>
-          <button
-            className="add-cart"
-            onClick={() => {
-              if (user.id === "") {
-                toast.error("Please login to add to cart", {
-                  duration: 2000,
-                });
-                return;
-              }
-              dispatch(
-                addToCart({
-                  id: data._id,
-                  title: data.title,
-                  description: data.description,
-                  price: data.price,
-                  img: data.images[0],
-                  quantity,
-                })
-              );
-              toast.success("Product added to cart!", {
-                duration: 2000,
-              });
-            }}
-          >
-            <AddShoppingCartOutlinedIcon />
-            add to cart
-          </button>
         </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 

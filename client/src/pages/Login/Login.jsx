@@ -10,6 +10,7 @@ import axios from "axios";
 import "./Login.css";
 import image from "../../assets/login.svg";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import Loader from "../../components/Loader/Loader";
 const Login = () => {
   const formRef = useRef(null);
   const { login, loading, error } = useLogin();
@@ -108,17 +109,19 @@ const Login = () => {
                   type="submit"
                   disabled={loading}
                 >
-                  {loading ? "loading..." : location}
+                  {loading ? <Loader /> : location}
                 </button>
-                {location === "Login" && <button
-                  className="login-submit"
-                  onClick={() => {
-                    setEmail("test@gmail.com");
-                    setPassword("test");
-                  }}
-                >
-                  Use Test Account
-                </button>}
+                {location === "Login" && (
+                  <button
+                    className="login-submit"
+                    onClick={() => {
+                      setEmail("test@gmail.com");
+                      setPassword("test");
+                    }}
+                  >
+                    Use Test Account
+                  </button>
+                )}
               </div>
             </form>
             <p

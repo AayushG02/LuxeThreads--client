@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import Card from "../Card/Card";
 import "./ProductList.css";
+import SkeletonCard from "../Skeleton/SkeletonCard";
 const ProductList = ({ type, isProducts, filters }) => {
   const [selectedCategory, setSelectedCategory] = useState("");
   if (isProducts) {
@@ -68,15 +69,17 @@ const ProductList = ({ type, isProducts, filters }) => {
         </div>
       </div>
       <div className="featured-products-list">
-        {data?.length === 0
-          ? "Sorry no products available"
-          : isError
-          ? "Something went wrong"
-          : isLoading
-          ? "Loading..."
-          : data?.map((item) => {
-              return <Card key={item._id} item={item} />;
-            })}
+        {data?.length === 0 ? (
+          "Sorry no products available"
+        ) : isError ? (
+          "Something went wrong"
+        ) : isLoading ? (
+          <SkeletonCard />
+        ) : (
+          data?.map((item) => {
+            return <Card key={item._id} item={item} />;
+          })
+        )}
       </div>
     </>
   );
