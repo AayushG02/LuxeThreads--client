@@ -4,7 +4,7 @@ Welcome to LuxeThreads, an elegant and efficient e-commerce store built using th
 
 <img src="https://res.cloudinary.com/luxethreads/image/upload/v1705010264/projects/shi44eseyojxbldvtbi5.png" alt="project front page" />
 
-### <a href="https://luxethreads.netlify.app"> Live Demo </a>
+### <a href="https://luxethreads.vercel.app"> Live Demo </a>
 `email: test@gmail.com`
 `password: test`
 
